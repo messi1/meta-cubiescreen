@@ -3,6 +3,7 @@ include recipes-core/images/core-image-minimal.bb
 DISTRO_FEATURES_append = " opengl wayland"
 
 IMAGE_INSTALL_append_pn-core-image-minimal = " \
+    ft5x-mod \
     sunxi-mali sunxi-mali-dev sunxi-mali-dbg \
     openssh-sftp-server \
     gstreamer \
