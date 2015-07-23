@@ -1,8 +1,10 @@
 include recipes-core/images/core-image-minimal.bb
 
+LICENSE = "MIT"
+
 DISTRO_FEATURES_append = " opengl wayland"
 
-IMAGE_INSTALL_append_pn-core-image-minimal = " \
+IMAGE_INSTALL += " \
     ft5x-mod \
     sunxi-mali sunxi-mali-dev sunxi-mali-dbg \
     openssh-sftp-server \

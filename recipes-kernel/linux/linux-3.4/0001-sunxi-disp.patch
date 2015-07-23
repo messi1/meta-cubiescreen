@@ -1,0 +1,49 @@
+--- a/drivers/video/sunxi/disp/disp_lcd.c	2015-07-22 22:54:43.234499010 +0200
++++ b/drivers/video/sunxi/disp/disp_lcd.c	2014-08-16 14:02:55.000000000 +0200
+@@ -648,8 +648,32 @@ LCD_get_sys_config(__u32 sel, __disp_lcd
+ }
+ 
+ 
+-void
+-LCD_OPEN_FUNC(__u32 sel, LCD_FUNC func, __u32 delay)
++
++void LCD_delay_us(__u32 us) 
++{
++volatile __u32 time;
++//#ifdef __LINUX_OSAL__
++        udelay(us);
++//#endif
++//#ifdef __BOOT_OSAL__
++        
++        for(time = 0; time < (us*700/10);time++);//assume cpu runs at 700Mhz,10 clock one cycle
++//#endif
++}
++
++void LCD_delay_ms(__u32 ms) 
++{
++//#ifdef __LINUX_OSAL__
++        __u32 timeout = ms*HZ/1000;
++        set_current_state(TASK_INTERRUPTIBLE);
++        schedule_timeout(timeout);
++//#endif
++#ifdef __BOOT_OSAL__
++        wBoot_timer_delay(ms);//assume cpu runs at 1000Mhz,10 clock one cycle
++#endif
++}
++
++void LCD_OPEN_FUNC(__u32 sel, LCD_FUNC func, __u32 delay)
+ {
+ 	open_flow[sel].func[open_flow[sel].func_num].func = func;
+ 	open_flow[sel].func[open_flow[sel].func_num].delay = delay;
+--- a/drivers/video/sunxi/disp/disp_lcd.h	2015-07-22 22:54:43.234499010 +0200
++++ b/drivers/video/sunxi/video/disp/disp_lcd.h	2014-08-16 14:02:58.000000000 +0200
+@@ -32,7 +32,8 @@ __u32 tv_mode_to_width(__disp_tv_mode_t
+ __u32 tv_mode_to_height(__disp_tv_mode_t mode);
+ __u32 vga_mode_to_width(__disp_vga_mode_t mode);
+ __u32 vga_mode_to_height(__disp_vga_mode_t mode);
+-
++void LCD_delay_ms(__u32 ms) ;
++void LCD_delay_us(__u32 ns);
+ 
+ void TCON_open(__u32 sel);
+ void TCON_close(__u32 sel);
