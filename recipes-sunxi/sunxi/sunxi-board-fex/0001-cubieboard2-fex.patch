@@ -1,5 +1,5 @@
---- a/sunxi-board-fex/1.1+gitAUTOINC+442f0669fe-r0/git/sys_config/a20/cubieboard2.fex	2015-07-22 22:54:53.730498736 +0200
-+++ b/sunxi-board-fex/1.1+gitAUTOINC+442f0669fe-r0/git/sys_config/a20/cubieboard2.fex	2015-07-24 20:31:27.264046087 +0200
+--- a/sys_config/a20/cubieboard2.fex	2015-07-22 22:54:53.730498736 +0200
++++ b/sys_config/a20/cubieboard2.fex	2015-07-24 20:31:27.264046087 +0200
 @@ -7,8 +7,8 @@ eraseflag = 0
  
  [target]
