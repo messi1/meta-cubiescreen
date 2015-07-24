@@ -1,0 +1,16 @@
+--- a/src/plugins/platforms/eglfs/qeglfshooks_stub.cpp	2014-09-11 12:48:06.000000000 +0200
++++ b/src/plugins/platforms/eglfsqeglfshooks_stub.cpp	2015-07-24 20:36:49.284037677 +0200
+@@ -165,7 +165,12 @@ EGLNativeWindowType QEglFSHooks::createN
+     Q_UNUSED(platformWindow);
+     Q_UNUSED(size);
+     Q_UNUSED(format);
+-    return 0;
++    //return 0;
++    static struct mali_native_window native_window = {
++        .width = (short unsigned int)size.width(),
++        .height = (short unsigned int)size.height(),
++    };
++    return &native_window;
+ }
+ 
+ void QEglFSHooks::destroyNativeWindow(EGLNativeWindowType window)
