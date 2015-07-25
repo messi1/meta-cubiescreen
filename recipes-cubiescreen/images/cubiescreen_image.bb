@@ -2,8 +2,6 @@ include recipes-core/images/core-image-minimal.bb
 
 LICENSE = "MIT"
 
-DISTRO_FEATURES_append = " opengl wayland"
-
 IMAGE_INSTALL += " \
     ft5x-mod \
     sunxi-mali sunxi-mali-dev sunxi-mali-dbg \
@@ -52,9 +50,3 @@ IMAGE_INSTALL += " \
     gcc g++ libgcc libgcc-dev libstdc++ libstdc++-dev libstdc++-staticdev \
     "
 
- 
-PACKAGECONFIG_append_pn-qtbase = "linuxfb accessibility gles2 openss icu udev widgets pulseaudio sql-sqlite sql-sqlite2 alsa"
-PACKAGECONFIG[gles2] = "-opengl es2 -eglfs -qpa eglfs,,virtual/libgles2 virtual/egl"
-#PACKAGECONFIG_append_pn-qtmultimedia = " gstreamer010 "
-PACKAGECONFIG_remove_pn-qtbase = "msse2"
-DISTRO_FEATURES_remove = "x11"
