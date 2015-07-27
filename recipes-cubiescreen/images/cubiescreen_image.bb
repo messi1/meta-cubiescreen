@@ -3,6 +3,7 @@ include recipes-core/images/core-image-minimal.bb
 LICENSE = "MIT"
 
 IMAGE_INSTALL += " \
+    udev-mali \
     kernel-modules \
     sunxi-mali sunxi-mali-dev sunxi-mali-dbg \
     openssh-sftp-server \
