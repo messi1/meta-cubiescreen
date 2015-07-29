@@ -1,5 +1,5 @@
---- a/sys_config/a20/cubieboard2.fex	2015-07-22 22:54:53.730498736 +0200
-+++ b/sys_config/a20/cubieboard2.fex	2015-07-24 20:31:27.264046087 +0200
+--- a/sys_config/a20/cubieboard2.fex	2015-07-29 21:22:49.934751891 +0200
++++ b/sys_config/a20/cubieboard2.fex	2015-07-29 21:25:31.426747674 +0200
 @@ -7,8 +7,8 @@ eraseflag = 0
  
  [target]
@@ -20,7 +20,42 @@
  twi1_scl = port:PB18<2><default><default><default>
  twi1_sda = port:PB19<2><default><default><default>
  
-@@ -305,97 +305,120 @@ good_block_ratio = 0
+@@ -237,22 +237,21 @@ spi_mosi = port:PA07<3><default><default
+ spi_miso = port:PA08<3><default><default><default>
+ 
+ [ctp_para]
+-ctp_used = 0
+-ctp_name = "gt811"
+-ctp_twi_id = 2
+-ctp_twi_addr = 0x40
+-ctp_screen_max_x = 1024
+-ctp_screen_max_y = 600
+-ctp_revert_x_flag = 0
++ctp_used = 1 
++ctp_name = "ft5x_ts"
++ctp_twi_id = 1 
++ctp_twi_addr = 0x5c 
++ctp_screen_max_x = 800 
++ctp_screen_max_y = 480 
++ctp_revert_x_flag = 0 
+ ctp_revert_y_flag = 0
+-ctp_exchange_x_y_flag = 1
+-ctp_firm = 1
+-ctp_int_port = port:PH21<6><default><default><default>
+-ctp_wakeup = port:PB13<1><default><default><1>
++ctp_exchange_x_y_flag = 0 
++ctp_int_port = port:PH7<6><default><default><default>
++ctp_io_port  = port:PH7<0><default><default><default> 
+ 
+ [ctp_list_para]
+-ctp_det_used = 0
+-ft5x_ts = 0
++ctp_det_used = 1
++ft5x_ts = 1
+ gt82x = 0
+ gslX680 = 0
+ gt9xx_ts = 0
+@@ -305,97 +304,109 @@ good_block_ratio = 0
  
  [disp_init]
  disp_init_enable = 1
@@ -54,27 +89,22 @@
 +screen1_output_mode = 5
 +fb0_width =1024
 +fb0_height = 768
-+
 +fb0_framebuffer_num     = 2
 +fb0_format              = 10
 +fb0_pixel_sequence      = 0
 +fb0_scaler_mode_enable  = 1
-+
 +fb1_width = 1024
 +fb1_height = 768
 +fb1_framebuffer_num     = 2
 +fb1_format              = 10
 +fb1_pixel_sequence      = 0
 +fb1_scaler_mode_enable  = 0
-+
 +lcd0_backlight          = 197
 +lcd1_backlight          = 197
-+
 +lcd0_bright             = 50
 +lcd0_contrast           = 50
 +lcd0_saturation         = 57
 +lcd0_hue                = 50
-+
 +lcd1_bright             = 50
 +lcd1_contrast           = 50
 +lcd1_saturation         = 57
@@ -110,7 +140,6 @@
 -lcd_frm = 1
 -lcd_io_cfg0 = 0
 +lcd_used                = 1
-+
 +lcd_x                   = 800
 +lcd_y                   = 480
 +lcd_width           	= 0
@@ -179,13 +208,10 @@
 +lcd_gamma_tbl_0         = 0x00000000
 +lcd_gamma_tbl_1         = 0x00010101
 +lcd_gamma_tbl_255       = 0x00ffffff
-+
 +lcd_bl_en_used          = 0
 +lcd_bl_en               = 
-+
 +lcd_power_used          = 1
 +lcd_power               = port:PB10<1><0><default><1>
-+
 +lcd_pwm_used            = 1
 +lcd_pwm                 = port:PB02<2><0><default><default>
 +;lcd-cs
@@ -196,7 +222,6 @@
 +lcd_gpio_2              = port:PI12<1><0><default><1>
 +;lcd-reset
 +lcd_gpio_3              = port:PB11<1><0><default><1>
-+
 +lcdd0                   = port:PD00<2><0><default><default>
 +lcdd1                   = port:PD01<2><0><default><default>
 +lcdd2                   = port:PD02<2><0><default><default>
@@ -225,11 +250,10 @@
 +lcdde                   = port:PD25<2><0><default><default>
 +lcdhsync                = port:PD26<2><0><default><default>
 +lcdvsync                = port:PD27<2><0><default><default>
-+
  
  [lcd1_para]
  lcd_used = 0
-@@ -956,20 +979,20 @@ key_max = 40
+@@ -956,20 +967,20 @@ key_max = 40
  
  [dvfs_table]
  max_freq = 912000000

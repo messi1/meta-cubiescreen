@@ -3,6 +3,9 @@ include recipes-core/images/core-image-minimal.bb
 LICENSE = "MIT"
 
 IMAGE_INSTALL += " \
+    gdb \
+    dropbear \
+    i2c-tools \
     udev-mali \
     kernel-modules \
     sunxi-mali sunxi-mali-dev sunxi-mali-dbg \
