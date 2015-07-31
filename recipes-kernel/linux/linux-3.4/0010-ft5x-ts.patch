@@ -6,7 +6,7 @@ index 5d8dc97..f87e67e 100644
  	ft5x_ts->early_suspend.resume	= ft5x_ts_resume;
  	register_early_suspend(&ft5x_ts->early_suspend);
  #endif
-+	ft5x_set_reg(0x6e, 0x08);//int enable,low,indicate mode
++	ft5x_set_reg(0x6e, 0x0a);//int enable,low,indicate mode
 +	ft5x_set_reg(0x67, 100); //set x sensitivity
 +	ft5x_set_reg(0x68, 100); //set y sensitivity
  
