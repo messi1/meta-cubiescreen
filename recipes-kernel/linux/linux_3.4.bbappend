@@ -8,6 +8,7 @@ SRC_URI += "file://0010-ft5x-ts.patch"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 #SRC_URI += "file://defconfig"
 
+KERNEL_MODULE_AUTOLOAD += "ft5x_ts"
 KERNEL_MODULE_AUTOLOAD += "lcd"
 KERNEL_MODULE_AUTOLOAD += "hdmi"
 KERNEL_MODULE_AUTOLOAD += "ump"
