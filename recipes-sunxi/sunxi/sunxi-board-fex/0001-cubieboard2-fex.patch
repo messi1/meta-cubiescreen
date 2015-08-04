@@ -1,5 +1,7 @@
---- a/sys_config/a20/cubieboard2.fex	2015-07-29 21:22:49.934751891 +0200
-+++ b/sys_config/a20/cubieboard2.fex	2015-07-29 21:25:31.426747674 +0200
+diff --git a/sys_config/a20/cubieboard2.fex b/sys_config/a20/cubieboard2.fex
+index c8c9c74..5af8b1e 100644
+--- a/sys_config/a20/cubieboard2.fex
++++ b/sys_config/a20/cubieboard2.fex
 @@ -7,8 +7,8 @@ eraseflag = 0
  
  [target]
@@ -11,7 +13,18 @@
  ldo2_vol = 3000
  ldo3_vol = 2800
  ldo4_vol = 2800
-@@ -125,7 +125,7 @@ twi0_scl = port:PB00<2><default><default
+@@ -98,6 +98,10 @@ dram_emr3 = 0x0
+ mali_used = 1
+ mali_clkdiv = 1
+ 
++[g2d_para]
++g2d_used = 1
++g2d_size = 0x1000000
++
+ [emac_para]
+ emac_used = 1
+ emac_rxd3 = port:PA00<2><default><default><default>
+@@ -125,7 +129,7 @@ twi0_scl = port:PB00<2><default><default><default>
  twi0_sda = port:PB01<2><default><default><default>
  
  [twi1_para]
@@ -20,7 +33,7 @@
  twi1_scl = port:PB18<2><default><default><default>
  twi1_sda = port:PB19<2><default><default><default>
  
-@@ -237,22 +237,21 @@ spi_mosi = port:PA07<3><default><default
+@@ -237,22 +241,21 @@ spi_mosi = port:PA07<3><default><default><default>
  spi_miso = port:PA08<3><default><default><default>
  
  [ctp_para]
@@ -55,60 +68,32 @@
  gt82x = 0
  gslX680 = 0
  gt9xx_ts = 0
-@@ -305,97 +304,109 @@ good_block_ratio = 0
+@@ -305,15 +308,19 @@ good_block_ratio = 0
  
  [disp_init]
  disp_init_enable = 1
 -disp_mode = 0
 -screen0_output_type = 3
--screen0_output_mode = 4
++disp_mode = 2
++screen0_output_type = 1
+ screen0_output_mode = 4
 -screen1_output_type = 0
--screen1_output_mode = 4
--fb0_framebuffer_num = 2
--fb0_format = 10
--fb0_pixel_sequence = 0
--fb0_scaler_mode_enable = 0
--fb1_framebuffer_num = 2
--fb1_format = 10
--fb1_pixel_sequence = 0
--fb1_scaler_mode_enable = 0
--lcd0_backlight = 197
--lcd1_backlight = 197
--lcd0_bright = 50
--lcd0_contrast = 50
--lcd0_saturation = 57
--lcd0_hue = 50
--lcd1_bright = 50
--lcd1_contrast = 50
--lcd1_saturation = 57
--lcd1_hue = 50
-+disp_mode = 4
-+screen0_output_type     = 1
-+screen0_output_mode     = 4
 +screen1_output_type = 3
-+screen1_output_mode = 5
+ screen1_output_mode = 4
 +fb0_width =1024
 +fb0_height = 768
-+fb0_framebuffer_num     = 2
-+fb0_format              = 10
-+fb0_pixel_sequence      = 0
-+fb0_scaler_mode_enable  = 1
+ fb0_framebuffer_num = 2
+ fb0_format = 10
+ fb0_pixel_sequence = 0
+-fb0_scaler_mode_enable = 0
++fb0_scaler_mode_enable = 1
 +fb1_width = 1024
 +fb1_height = 768
-+fb1_framebuffer_num     = 2
-+fb1_format              = 10
-+fb1_pixel_sequence      = 0
-+fb1_scaler_mode_enable  = 0
-+lcd0_backlight          = 197
-+lcd1_backlight          = 197
-+lcd0_bright             = 50
-+lcd0_contrast           = 50
-+lcd0_saturation         = 57
-+lcd0_hue                = 50
-+lcd1_bright             = 50
-+lcd1_contrast           = 50
-+lcd1_saturation         = 57
-+lcd1_hue                = 50
+ fb1_framebuffer_num = 2
+ fb1_format = 10
+ fb1_pixel_sequence = 0
+@@ -330,44 +337,54 @@ lcd1_saturation = 57
+ lcd1_hue = 50
  
  [lcd0_para]
 -lcd_used = 0
@@ -177,39 +162,13 @@
 -lcd_power = port:PH08<1><0><default><1>
 -lcd_pwm_used = 0
 -lcd_pwm = port:PB02<2><0><default><default>
--lcdd0 = port:PD00<2><0><default><default>
--lcdd1 = port:PD01<2><0><default><default>
--lcdd2 = port:PD02<2><0><default><default>
--lcdd3 = port:PD03<2><0><default><default>
--lcdd4 = port:PD04<2><0><default><default>
--lcdd5 = port:PD05<2><0><default><default>
--lcdd6 = port:PD06<2><0><default><default>
--lcdd7 = port:PD07<2><0><default><default>
--lcdd8 = port:PD08<2><0><default><default>
--lcdd9 = port:PD09<2><0><default><default>
--lcdd10 = port:PD10<2><0><default><default>
--lcdd11 = port:PD11<2><0><default><default>
--lcdd12 = port:PD12<2><0><default><default>
--lcdd13 = port:PD13<2><0><default><default>
--lcdd14 = port:PD14<2><0><default><default>
--lcdd15 = port:PD15<2><0><default><default>
--lcdd16 = port:PD16<2><0><default><default>
--lcdd17 = port:PD17<2><0><default><default>
--lcdd18 = port:PD18<2><0><default><default>
--lcdd19 = port:PD19<2><0><default><default>
--lcdd20 = port:PD20<2><0><default><default>
--lcdd21 = port:PD21<2><0><default><default>
--lcdd22 = port:PD22<2><0><default><default>
--lcdd23 = port:PD23<2><0><default><default>
--lcdclk = port:PD24<2><0><default><default>
--lcdde = port:PD25<2><0><default><default>
--lcdhsync = port:PD26<2><0><default><default>
--lcdvsync = port:PD27<2><0><default><default>
 +lcd_gamma_tbl_0         = 0x00000000
 +lcd_gamma_tbl_1         = 0x00010101
 +lcd_gamma_tbl_255       = 0x00ffffff
++
 +lcd_bl_en_used          = 0
 +lcd_bl_en               = 
++
 +lcd_power_used          = 1
 +lcd_power               = port:PB10<1><0><default><1>
 +lcd_pwm_used            = 1
@@ -222,38 +181,10 @@
 +lcd_gpio_2              = port:PI12<1><0><default><1>
 +;lcd-reset
 +lcd_gpio_3              = port:PB11<1><0><default><1>
-+lcdd0                   = port:PD00<2><0><default><default>
-+lcdd1                   = port:PD01<2><0><default><default>
-+lcdd2                   = port:PD02<2><0><default><default>
-+lcdd3                   = port:PD03<2><0><default><default>
-+lcdd4                   = port:PD04<2><0><default><default>
-+lcdd5                   = port:PD05<2><0><default><default>
-+lcdd6                   = port:PD06<2><0><default><default>
-+lcdd7                   = port:PD07<2><0><default><default>
-+lcdd8                   = port:PD08<2><0><default><default>
-+lcdd9                   = port:PD09<2><0><default><default>
-+lcdd10                  = port:PD10<2><0><default><default>
-+lcdd11                  = port:PD11<2><0><default><default>
-+lcdd12                  = port:PD12<2><0><default><default>
-+lcdd13                  = port:PD13<2><0><default><default>
-+lcdd14                  = port:PD14<2><0><default><default>
-+lcdd15                  = port:PD15<2><0><default><default>
-+lcdd16                  = port:PD16<2><0><default><default>
-+lcdd17                  = port:PD17<2><0><default><default>
-+lcdd18                  = port:PD18<2><0><default><default>
-+lcdd19                  = port:PD19<2><0><default><default>
-+lcdd20                  = port:PD20<2><0><default><default>
-+lcdd21                  = port:PD21<2><0><default><default>
-+lcdd22                  = port:PD22<2><0><default><default>
-+lcdd23                  = port:PD23<2><0><default><default>
-+lcdclk                  = port:PD24<2><0><default><default>
-+lcdde                   = port:PD25<2><0><default><default>
-+lcdhsync                = port:PD26<2><0><default><default>
-+lcdvsync                = port:PD27<2><0><default><default>
- 
- [lcd1_para]
- lcd_used = 0
-@@ -956,20 +967,20 @@ key_max = 40
+ lcdd0 = port:PD00<2><0><default><default>
+ lcdd1 = port:PD01<2><0><default><default>
+ lcdd2 = port:PD02<2><0><default><default>
+@@ -956,20 +973,20 @@ key_max = 40
  
  [dvfs_table]
  max_freq = 912000000
