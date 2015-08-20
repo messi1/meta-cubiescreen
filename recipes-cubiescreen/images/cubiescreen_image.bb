@@ -3,7 +3,8 @@ include recipes-core/images/core-image-minimal.bb
 LICENSE = "MIT"
 
 IMAGE_INSTALL += " \
-    gdb \
+    tslib \
+    evtest \
     dropbear \
     i2c-tools \
     udev-mali \

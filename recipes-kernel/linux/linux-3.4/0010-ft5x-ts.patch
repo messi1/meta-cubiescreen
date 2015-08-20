@@ -1,14 +1,53 @@
 diff --git a/drivers/input/touchscreen/ft5x_ts.c b/drivers/input/touchscreen/ft5x_ts.c
-index 5d8dc97..f87e67e 100644
+index 5d8dc97..365ccd8 100644
 --- a/drivers/input/touchscreen/ft5x_ts.c
 +++ b/drivers/input/touchscreen/ft5x_ts.c
-@@ -1756,13 +1756,16 @@ ft5x_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
+@@ -32,11 +32,13 @@
+ #include <linux/errno.h>
+ #include <linux/kernel.h>
+ #include <linux/module.h>
++#include <linux/moduleparam.h>
+ #include <linux/slab.h>
+ #include <linux/platform_device.h>
+ #include <linux/async.h>
+ #include <linux/hrtimer.h>
+ #include <linux/init.h>
++#include <linux/stat.h>
+ #include <linux/ioport.h>
+ #include <asm/irq.h>
+ #include <asm/io.h>
+@@ -149,6 +151,23 @@ static union{
+ }u_i2c_addr = {{0x00},};
+ static __u32 twi_id = 0;
+ 
++static short interrupt_settings = 0x08;
++static short interrupt_width    = 100;
++static short sensitivity_x      = 100;
++static short sensitivity_y      = 100;
++
++module_param(interrupt_settings, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++MODULE_PARM_DESC(interrupt_settings, "Interrupt settings can be: 0x08, 0x09, 0x0a");
++
++module_param(interrupt_width, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++MODULE_PARM_DESC(interrupt_width, "Pulse with of the interrupt");
++
++module_param(sensitivity_x, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++MODULE_PARM_DESC(sensitivity_x, "Sensitivity of the touchscreen in the x-axis");
++
++module_param(sensitivity_y, short, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
++MODULE_PARM_DESC(sensitivity_y, "Sensitivity of the touchscreen in the y-axis");
++
+ /*
+  * ctp_get_pendown_state  : get the int_line data state,
+  *
+@@ -1756,13 +1775,17 @@ ft5x_ts_probe(struct i2c_client *client, const struct i2c_device_id *id)
  	ft5x_ts->early_suspend.resume	= ft5x_ts_resume;
  	register_early_suspend(&ft5x_ts->early_suspend);
  #endif
-+	ft5x_set_reg(0x6e, 0x0a);//int enable,low,indicate mode
-+	ft5x_set_reg(0x67, 100); //set x sensitivity
-+	ft5x_set_reg(0x68, 100); //set y sensitivity
++	ft5x_set_reg(0x6e, interrupt_settings); // int enable,low,indicate mode
++	ft5x_set_reg(0x6f, interrupt_width);//int enable,low,indicate mode
++	ft5x_set_reg(0x67, sensitivity_x); //set x sensitivity
++	ft5x_set_reg(0x68, sensitivity_y); //set y sensitivity
  
  	err = ctp_ops.set_irq_mode("ctp_para", "ctp_int_port", CTP_IRQ_MODE);
  	if(0 != err){
